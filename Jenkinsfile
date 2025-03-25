@@ -9,7 +9,7 @@ pipeline {
         stage('Run local script') {
             steps {
                 script {
-                    sh 'app.py 2 4'
+                    sh './app.py 2 4'
                 }
             }
         }
@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     git clone 'https://github.com/devRobots/jenkins-test-slave'
-                    sh 'jenkins-test-slave/app.py 1'
+                    sh './jenkins-test-slave/app.py 1'
                 }
             }
         }
