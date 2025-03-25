@@ -9,10 +9,7 @@ pipeline {
         stage('Run local script') {
             steps {
                 script {
-                    OUTPUTRES = sh (
-                        script: 'ls -l',
-                        returnStdout: true
-                    ).trim()
+                    sh 'ls -l'
                 }
             }
         }
@@ -20,7 +17,6 @@ pipeline {
             steps {
                 script {
                     git clone 'https://github.com/devRobots/jenkins-test-slave'
-                    echo "Previous result: ${OUTPUTRES}"
                 }
             }
         }
