@@ -12,7 +12,7 @@ pipeline {
                     print '\u001B[34m[B2B] - Running first script\u001B[0m: Starting Python script... }'
                 }
                 script {
-                    outputres = (sh 'app.py' 2 4)
+                    outputres = (sh 'app.py 2 4')
                 }
             }
         }
@@ -23,7 +23,7 @@ pipeline {
                 }
                 script {
                     git clone "https://github.com/devRobots/jenkins-test-slave"
-                    sh 'jenkins-test-slave/app.py' outputres
+                    sh 'jenkins-test-slave/app.py ' + outputres
                 }
             }
         }
