@@ -3,11 +3,10 @@
 def OUTPUTRES = '1'
 
 pipeline {
-    agent any
+    agent { docker { image 'python:3.13.2-alpine3.21' } }
 
     stages {
         stage('Run local script') {
-            agent { docker { image 'python:3.13.2-alpine3.21' } }
             steps {
                 script {
                     sh 'python app.py 2 4'
