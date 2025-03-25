@@ -1,3 +1,5 @@
+#!/opt/python/as2_8/bin/python3
+
 import sys
 from src.math import sum
 
