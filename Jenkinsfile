@@ -9,7 +9,7 @@ pipeline {
         stage('Run local script') {
             steps {
                 script {
-                    sh './app.py 2 4'
+                    sh '$((2+4))'
                 }
             }
         }
