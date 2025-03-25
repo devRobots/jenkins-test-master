@@ -1,6 +1,6 @@
 #!groovy
 
-def outputres = '1'
+def OUTPUTRES = '1'
 
 pipeline {
     agent any
@@ -8,17 +8,19 @@ pipeline {
     stages {
         stage('Run local script') {
             steps {
-                outputres = sh(
-                    script: 'ls -l',
-                    returnStdout: true
-                ).trim()
+                script {
+                    OUTPUTRES = sh (
+                        script: 'ls -l',
+                        returnStdout: true
+                    ).trim()
+                }
             }
         }
         stage('Run remote script') {
             steps {
                 script {
                     git clone 'https://github.com/devRobots/jenkins-test-slave'
-                    echo "Previous result: ${outputres}"
+                    echo "Previous result: ${OUTPUTRES}"
                 }
             }
         }
