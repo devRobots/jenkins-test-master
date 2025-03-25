@@ -8,16 +8,17 @@ pipeline {
     stages {
         stage('Run local script') {
             steps {
-                script {
-                    sh '$((2+4))'
-                }
+                outputres = sh(
+                    script: 'ls -l',
+                    returnStdout: true
+                ).trim()
             }
         }
         stage('Run remote script') {
             steps {
                 script {
                     git clone 'https://github.com/devRobots/jenkins-test-slave'
-                    sh './jenkins-test-slave/app.py 1'
+                    echo "Previous result: ${outputres}"
                 }
             }
         }
