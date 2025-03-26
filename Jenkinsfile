@@ -1,22 +1,25 @@
 #!groovy
 
-def OUTPUTRES = '1'
-
 pipeline {
-    agent { docker { image 'python:3.13.2-alpine3.21' } }
+    agent any
 
     stages {
         stage('Run local script') {
             steps {
                 script {
-                    sh 'python app.py 2 4'
+                    git(url:'https://github.com/devRobots/jenkins-test-master', branch: 'main')
+                    sh 'echo "Actually $(cat README.md)"'
+                    sh 'echo "Hola mundo desde $(cat README.md)" > output.txt'
+                    sh 'mv output.txt /tmp/'
                 }
             }
         }
         stage('Run remote script') {
             steps {
                 script {
-                    git clone 'https://github.com/devRobots/jenkins-test-slave'
+                    git(url:'https://github.com/devRobots/jenkins-test-slave', branch: 'main')
+                    sh 'echo "Actually $(cat README.md)"'
+                    sh 'echo "Got this from /tmp $(cat /tmp/output.txt)"'
                 }
             }
         }
